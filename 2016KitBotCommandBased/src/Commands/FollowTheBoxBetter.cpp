@@ -14,6 +14,7 @@
 
 double desiredAngle;
 double lastTick;
+std::shared_ptr<NetworkTable> FollowTheBoxBetter::table;
 
 FollowTheBoxBetter::FollowTheBoxBetter(): Command() {
         // Use requires() here to declare subsystem dependencies
@@ -27,15 +28,18 @@ FollowTheBoxBetter::FollowTheBoxBetter(): Command() {
 
 // Called just before this Command runs the first time
 void FollowTheBoxBetter::Initialize() {
-	NetworkTable::SetServerMode();
-	NetworkTable::SetIPAddress("0.0.0.0");
-//	NetworkTable::SetTeam(639);
-	table = NetworkTable::GetTable("CameraTracker");
-	table->PutNumber("XAngleToTarget", 0.0);
-	table->PutNumber("TargetX", 0.0);
-	table->PutNumber("TargetY", 0.0);
-	table->PutNumber("ticker", 0.0);
-	lastTick = 0;
+	if (table == nullptr)
+	{
+		NetworkTable::SetServerMode();
+		NetworkTable::SetIPAddress("0.0.0.0");
+	//	NetworkTable::SetTeam(639);
+		table = NetworkTable::GetTable("CameraTracker");
+		table->PutNumber("XAngleToTarget", 0.0);
+		table->PutNumber("TargetX", 0.0);
+		table->PutNumber("TargetY", 0.0);
+		table->PutNumber("ticker", 0.0);
+		lastTick = 0;
+	}
 	desiredAngle = Robot::drive->GetYaw();
 }
 
@@ -54,12 +58,12 @@ void FollowTheBoxBetter::Execute() {
 //	SmartDashboard::PutNumber("CurrentYaw", currentAngle);
 	SmartDashboard::PutNumber("AngleDiffCalculated", angleDiff);
 	SmartDashboard::PutNumber("Tick", currentTick);
-	//SmartDashboard::PutNumber("TargetX", targetX);
-	//SmartDashboard::PutNumber("TargetY", targetY);
+	SmartDashboard::PutNumber("TargetX", table->GetNumber("TargetX", 0.0));
+	SmartDashboard::PutNumber("TargetY", table->GetNumber("TargetY", 0.0));
 	printf("being run; number is %f\n", desiredAngle);
 	double rSpeed = 0;
 	double lSpeed = 0;
-	if (fabs(angleDiff) > 2)
+	/*if (fabs(angleDiff) > 2)
 	{
 		if (fabs(angleDiff) > 20)
 		{
@@ -83,7 +87,7 @@ void FollowTheBoxBetter::Execute() {
 	else
 	{
 		lSpeed = lSpeed * -1;
-	}
+	}*/
 	Robot::drive->TankDrive(lSpeed, rSpeed, false);
 }
 

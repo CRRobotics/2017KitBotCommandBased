@@ -33,9 +33,9 @@ public:
 	virtual bool IsFinished();
 	virtual void End();
 	virtual void Interrupted();
+	static	std::shared_ptr<NetworkTable> table;
 
 private:
-	std::shared_ptr<NetworkTable> table;
 };
 
 #endif
