@@ -50,8 +50,9 @@ void JoystickDrive::Execute() {
 	//					 frc::SmartDashboard::GetNumber("Speed_I", 0),
 	//					 frc::SmartDashboard::GetNumber("Speed_D", 0));
 	double targetY = table->GetNumber("TargetY", 0.0);
-	double angleY = (480 - targetY) * 0.068;
-	double theoreticalDistance = 88 / tan(angleY * M_PI / 180);
+	double angleY = (480 - targetY) * 0.078445;
+	angleY = (12.2468 - 18.8268) + angleY;
+	double theoreticalDistance = 88 / tan(angleY * 3.1415926535 / 180);
 	frc::SmartDashboard::PutNumber("AngleY", angleY);
 }
 

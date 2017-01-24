@@ -63,7 +63,7 @@ void FollowTheBoxBetter::Execute() {
 	printf("being run; number is %f\n", desiredAngle);
 	double rSpeed = 0;
 	double lSpeed = 0;
-	/*if (fabs(angleDiff) > 2)
+	if (fabs(angleDiff) > 2)
 	{
 		if (fabs(angleDiff) > 20)
 		{
