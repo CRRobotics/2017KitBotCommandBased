@@ -43,16 +43,19 @@ void JoystickDrive::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void JoystickDrive::Execute() {
-	Robot::drive->TankDrive(Robot::oi->GetLJoystick() * 0.5, Robot::oi->GetRJoystick() * 0.5);
+	//Robot::drive->TankDrive(Robot::oi->GetLJoystick() * 0.5, Robot::oi->GetRJoystick() * 0.5);
+	Robot::drive->TankDrive(0, 0);
 	frc::SmartDashboard::PutNumber("rEnc", RobotMap::driverEnc->Get());
 	frc::SmartDashboard::PutNumber("lEnc", RobotMap::drivelEnc->Get());
 	//Robot::drive->setPID(frc::SmartDashboard::GetNumber("Speed_P", 0),
 	//					 frc::SmartDashboard::GetNumber("Speed_I", 0),
 	//					 frc::SmartDashboard::GetNumber("Speed_D", 0));
 	double targetY = table->GetNumber("TargetY", 0.0);
-	double angleY = (480 - targetY) * 0.068;
-	double theoreticalDistance = 88 / tan(angleY * M_PI / 180);
+	double angleY = (480 - targetY) * 0.078445;
+	angleY = (15.1397 - 18.8268) + angleY;
+	double theoreticalDistance = (88 - 5 + 2) / tan(angleY * M_PI / 180);
 	frc::SmartDashboard::PutNumber("AngleY", angleY);
+	frc::SmartDashboard::PutNumber("DistanceToTarget", theoreticalDistance);
 }
 
 // Make this return true when this Command no longer needs to run execute()
