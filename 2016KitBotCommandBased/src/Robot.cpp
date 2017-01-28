@@ -12,6 +12,8 @@
 #include "Commands/PushBackDrive.h"
 #include "Commands/FollowTheBox.h"
 #include "Commands/FollowTheBoxBetter.h"
+#include "Commands/DriveForward.h"
+#include "Commands/AutoTurn.h"
 
 std::unique_ptr<OI> Robot::oi;
 std::shared_ptr<Drive> Robot::drive;
@@ -29,11 +31,12 @@ frc::SendableChooser<frc::Command*> chooser;
 		frc::SmartDashboard::PutNumber("PCons", -0.005);
 		frc::SmartDashboard::PutNumber("DCons", 0.005);
 		frc::SmartDashboard::PutData("PushBackDrive", new PushBackDrive());
-		frc::SmartDashboard::PutData("Follow Target", new FollowTheBox());
+		frc::SmartDashboard::PutData("Drive Forward", new DriveForward(15));
+		frc::SmartDashboard::PutData("Auto Turn", new AutoTurn(30));
 		frc::SmartDashboard::PutData("Follow Target with NavX", new FollowTheBoxBetter());
-		frc::SmartDashboard::PutNumber("Speed_P ", -.005);
-		frc::SmartDashboard::PutNumber("Speed_I", 0.0);
-		frc::SmartDashboard::PutNumber("Speed_D", 0.05);
+		frc::SmartDashboard::PutNumber("Drive Distance", 0.0);
+		frc::SmartDashboard::PutNumber("Drive Angle", 0.0);
+		frc::SmartDashboard::PutNumber("Speed_D", 0.0);
 	}
 
 	/**
@@ -94,8 +97,8 @@ frc::SendableChooser<frc::Command*> chooser;
 		frc::Scheduler::GetInstance()->Run();
 		if (!RobotMap::driveahrs->IsCalibrating())
 			frc::SmartDashboard::PutNumber("CurrentYaw", Robot::drive->GetYaw());
-	    frc::SmartDashboard::PutNumber("rEnc",RobotMap::driverEnc->Get());
-	    frc::SmartDashboard::PutNumber("lEnc",RobotMap::drivelEnc->Get());
+	    //frc::SmartDashboard::PutNumber("rEnc",RobotMap::driverEnc->Get());
+	    //frc::SmartDashboard::PutNumber("lEnc",RobotMap::drivelEnc->Get());
 	    frc::SmartDashboard::PutNumber("LJoystick", Robot::oi->GetLJoystick());
 	    frc::SmartDashboard::PutNumber("RJoystick", Robot::oi->GetRJoystick());
 
