@@ -97,8 +97,8 @@ frc::SendableChooser<frc::Command*> chooser;
 		frc::Scheduler::GetInstance()->Run();
 		if (!RobotMap::driveahrs->IsCalibrating())
 			frc::SmartDashboard::PutNumber("CurrentYaw", Robot::drive->GetYaw());
-	    //frc::SmartDashboard::PutNumber("rEnc",RobotMap::driverEnc->Get());
-	    //frc::SmartDashboard::PutNumber("lEnc",RobotMap::drivelEnc->Get());
+	    frc::SmartDashboard::PutNumber("rEnc",RobotMap::driverEnc->Get());
+	    frc::SmartDashboard::PutNumber("lEnc",RobotMap::drivelEnc->Get());
 	    frc::SmartDashboard::PutNumber("LJoystick", Robot::oi->GetLJoystick());
 	    frc::SmartDashboard::PutNumber("RJoystick", Robot::oi->GetRJoystick());
 

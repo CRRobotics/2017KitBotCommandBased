@@ -12,7 +12,6 @@
 
 
 #include "Drive.h"
-#include "../RobotMap.h"
 #include "../Commands/JoystickDrive.h"
 #define MAX_ENC_SPEED 150
 
@@ -56,7 +55,7 @@ void Drive::InitDefaultCommand() {
 }
 
 void Drive::TankDrive(double l, double r, bool speedControl){
-	printf("TankDrive: %f %f %d\n", l, r, speedControl);
+	//printf("TankDrive: %f %f %d\n", l, r, speedControl);
 	if (!speedControl)
 	{
 		if (lSpeedController->IsEnabled())

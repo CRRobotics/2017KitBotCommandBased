@@ -44,10 +44,10 @@ void JoystickDrive::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void JoystickDrive::Execute() {
-	Robot::drive->TankDrive(Robot::oi->GetLJoystick(), Robot::oi->GetRJoystick(), true);
+	Robot::drive->TankDrive(Robot::oi->GetLJoystick() * fabs(Robot::oi->GetLJoystick()), Robot::oi->GetRJoystick() * fabs(Robot::oi->GetRJoystick()));
 	//Robot::drive->TankDrive(0, 0);
-	frc::SmartDashboard::PutNumber("rEnc", RobotMap::driverEnc->GetRate());
-	frc::SmartDashboard::PutNumber("lEnc", RobotMap::drivelEnc->GetRate());
+//	frc::SmartDashboard::PutNumber("rEnc", RobotMap::driverEnc->GetRate());
+//	frc::SmartDashboard::PutNumber("lEnc", RobotMap::drivelEnc->GetRate());
 	Robot::drive->setPID(frc::SmartDashboard::GetNumber("Speed_P", 0),
 						 frc::SmartDashboard::GetNumber("Speed_I", 0),
 						 frc::SmartDashboard::GetNumber("Speed_D", 0));

@@ -1,4 +1,8 @@
 #include "GearAlignment.h"
+#include "FollowTheBoxBetter.h"
+
+std::shared_ptr<NetworkTable> GearAlignment::table;
+
 
 GearAlignment::GearAlignment() {
 	// Use Requires() here to declare subsystem dependencies
@@ -7,13 +11,14 @@ GearAlignment::GearAlignment() {
 
 // Called just before this Command runs the first time
 void GearAlignment::Initialize() {
-	/*if (table == nullptr)
+	table = FollowTheBoxBetter::table;
+	if (table == nullptr)
 		{
 			NetworkTable::SetServerMode();
 			NetworkTable::SetIPAddress("0.0.0.0");
 		//	NetworkTable::SetTeam(639);
 			table = NetworkTable::GetTable("CameraTracker");
-		}*/
+		}
 
 
 }

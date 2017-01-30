@@ -7,7 +7,7 @@
 #include <cmath>
 
 double mod(double a, int n){
-	return a - floor(a/n) * n;
+	return a - (a/n) * n;
 //	return a % n;
 }
 
