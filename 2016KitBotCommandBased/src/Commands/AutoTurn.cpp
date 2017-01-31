@@ -23,10 +23,11 @@ void AutoTurn::Execute() {
 	{
 		direction = -1;
 	}
+	angleError = fabs(angleError);
 	if(angleError > SLOW_ANGLE_BEGIN)
 		Robot::drive->TankDrive(0.4 * direction, 0.4 * -direction, true);
 	else if (angleError > SLOW_ANGLE_LIMIT)
-		Robot::drive->TankDrive(fabs(angleError)/ SLOW_ANGLE_BEGIN * direction * 0.4, fabs(angleError)/ SLOW_ANGLE_BEGIN * -direction * 0.4, true);
+		Robot::drive->TankDrive(angleError/ SLOW_ANGLE_BEGIN * direction * 0.4, angleError/ SLOW_ANGLE_BEGIN * -direction * 0.4, true);
 	else
 		Robot::drive->TankDrive(0.2 * direction, 0.2 * -direction, true);
 }

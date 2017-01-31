@@ -14,7 +14,8 @@ public:
 	void Interrupted() override;
 	static	std::shared_ptr<NetworkTable> table;
 private:
-
+	double absoluteAngleOfTarget;
+	double lastTick;
 };
 
 #endif  // EXAMPLE_COMMAND_H
