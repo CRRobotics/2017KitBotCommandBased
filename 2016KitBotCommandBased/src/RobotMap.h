@@ -4,6 +4,7 @@
 #include "SpeedController.h"
 #include "WPILib.h"
 #include "AHRS.h"
+#include "CANTalon.h"
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -19,8 +20,8 @@
 
 class RobotMap {
 public:
-	static std::shared_ptr<VictorSP> driverDrive;
-	static std::shared_ptr<VictorSP> drivelDrive;
+	static std::shared_ptr<CANTalon> driverDrive;
+	static std::shared_ptr<CANTalon> drivelDrive;
 	static std::shared_ptr<Encoder> driverEnc;
 	static std::shared_ptr<Encoder> drivelEnc;
 	static std::shared_ptr<AHRS> driveahrs;

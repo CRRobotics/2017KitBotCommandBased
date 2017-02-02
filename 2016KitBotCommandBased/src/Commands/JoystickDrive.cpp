@@ -48,9 +48,10 @@ void JoystickDrive::Execute() {
 	//Robot::drive->TankDrive(0, 0);
 //	frc::SmartDashboard::PutNumber("rEnc", RobotMap::driverEnc->GetRate());
 //	frc::SmartDashboard::PutNumber("lEnc", RobotMap::drivelEnc->GetRate());
-	Robot::drive->setPID(frc::SmartDashboard::GetNumber("Speed_P", 0),
+	Robot::drive->SetPID(frc::SmartDashboard::GetNumber("Speed_P", 0),
 						 frc::SmartDashboard::GetNumber("Speed_I", 0),
-						 frc::SmartDashboard::GetNumber("Speed_D", 0));
+						 frc::SmartDashboard::GetNumber("Speed_D", 0),
+						 frc::SmartDashboard::GetNumber("Speed_F", 0));
 	double targetY = table->GetNumber("TargetY", 0.0);
 	double angleY = (480 - targetY) * 0.078445;
 	angleY = (15.1397 - 18.8268) + angleY;
