@@ -29,16 +29,21 @@ frc::SendableChooser<frc::Command*> chooser;
 		//chooser.AddDefault("Default Auto", new ExampleCommand());
 		// chooser.AddObject("My Auto", new MyAutoCommand());
 		//frc::SmartDashboard::PutData("Auto Modes", &chooser);
-		frc::SmartDashboard::PutNumber("PCons", -0.005);
-		frc::SmartDashboard::PutNumber("DCons", 0.005);
+		frc::SmartDashboard::PutNumber("Speed_P", -0.005);
+		frc::SmartDashboard::PutNumber("Speed_I", 0.000);
 		frc::SmartDashboard::PutData("PushBackDrive", new PushBackDrive());
 		frc::SmartDashboard::PutData("Drive Forward", new DriveForward(15));
 		frc::SmartDashboard::PutData("Drive Forward PID", new DriveForward(15));
 		frc::SmartDashboard::PutData("Auto Turn", new AutoTurn(30));
 		frc::SmartDashboard::PutData("Follow Target with NavX", new FollowTheBoxBetter());
+		frc::SmartDashboard::PutData("Follow Target", new FollowTheBox());
 		frc::SmartDashboard::PutNumber("Drive Distance", 0.0);
 		frc::SmartDashboard::PutNumber("Drive Angle", 0.0);
 		frc::SmartDashboard::PutNumber("Speed_D", 0.0);
+		frc::SmartDashboard::PutNumber("Speed_IZone", 0.0);
+		SmartDashboard::PutNumber("Pos_P", 0);
+		SmartDashboard::PutNumber("Pos_I", 0);
+		SmartDashboard::PutNumber("Pos_D", 0);
 	}
 
 	/**
@@ -99,8 +104,8 @@ frc::SendableChooser<frc::Command*> chooser;
 		frc::Scheduler::GetInstance()->Run();
 		if (!RobotMap::driveahrs->IsCalibrating())
 			frc::SmartDashboard::PutNumber("CurrentYaw", Robot::drive->GetYaw());
-	    frc::SmartDashboard::PutNumber("rEnc",RobotMap::driverEnc->Get());
-	    frc::SmartDashboard::PutNumber("lEnc",RobotMap::drivelEnc->Get());
+	    frc::SmartDashboard::PutNumber("rEnc",Robot::drive->GetREnc());
+	    frc::SmartDashboard::PutNumber("lEnc",Robot::drive->GetLEnc());
 	    frc::SmartDashboard::PutNumber("LJoystick", Robot::oi->GetLJoystick());
 	    frc::SmartDashboard::PutNumber("RJoystick", Robot::oi->GetRJoystick());
 

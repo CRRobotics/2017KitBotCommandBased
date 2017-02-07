@@ -36,6 +36,8 @@ public:
 
 private:
 	std::shared_ptr<NetworkTable> table;
+	double desiredAngle;
+	int mode;// 1 is follow angle, 0 is find new angle
 };
 
 #endif

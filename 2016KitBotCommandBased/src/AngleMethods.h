@@ -10,7 +10,7 @@
 
 double mod(double a, int n);
 
-double angle_diff(double a, double b);
+double angle_diff(int a, int b);
 double formatAngle(double a);
 
 #endif /* SRC_ANGLEMETHODS_H_ */

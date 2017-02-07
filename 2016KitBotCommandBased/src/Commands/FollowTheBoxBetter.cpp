@@ -63,32 +63,32 @@ void FollowTheBoxBetter::Execute() {
 	printf("being run; number is %f\n", desiredAngle);
 	double rSpeed = 0;
 	double lSpeed = 0;
-	/*if (fabs(angleDiff) > 2)
+	if (fabs(angleDiff) > 2)
 	{
-		if (fabs(angleDiff) > 20)
+		if (fabs(angleDiff) > 30)
 		{
-			rSpeed = 0.25;
-
+			rSpeed = 0.4;
 		}
 		else if (fabs(angleDiff) > 10)
 		{
-			rSpeed = (fabs(angleDiff) / 20) * 0.25;
+			rSpeed = (fabs(angleDiff) / 30) * 0.4;
 		}
 		else
 		{
-			rSpeed = 0.20;
+				rSpeed = 0.15;
 		}
-			lSpeed = rSpeed;
+		lSpeed = rSpeed;
 	}
-	if (angleDiff < 0)
+	if (angleDiff > 0)
 	{
 		rSpeed = rSpeed * -1;
 	}
 	else
 	{
 		lSpeed = lSpeed * -1;
-	}*/
-	Robot::drive->TankDrive(lSpeed, rSpeed, false);
+	}
+
+	Robot::drive->TankDrive(lSpeed, rSpeed, true);
 }
 
 // Make this return true when this Command no longer needs to run execute()

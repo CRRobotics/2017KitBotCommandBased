@@ -44,14 +44,16 @@ void JoystickDrive::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void JoystickDrive::Execute() {
-	Robot::drive->TankDrive(Robot::oi->GetLJoystick() * fabs(Robot::oi->GetLJoystick()), Robot::oi->GetRJoystick() * fabs(Robot::oi->GetRJoystick()));
-	//Robot::drive->TankDrive(0, 0);
-//	frc::SmartDashboard::PutNumber("rEnc", RobotMap::driverEnc->GetRate());
-//	frc::SmartDashboard::PutNumber("lEnc", RobotMap::drivelEnc->GetRate());
-	Robot::drive->SetPID(frc::SmartDashboard::GetNumber("Speed_P", 0),
+	Robot::drive->TankDrive(Robot::oi->GetLJoystick() * fabs(Robot::oi->GetLJoystick()), Robot::oi->GetRJoystick() * fabs(Robot::oi->GetRJoystick()), true);
+	frc::SmartDashboard::PutNumber("rEncRate", Robot::drive->GetREncRate());
+	frc::SmartDashboard::PutNumber("rEncRateError", (fabs(Robot::drive->rDrive->GetSetpoint()) - fabs(Robot::drive->GetREncRate())));
+	frc::SmartDashboard::PutNumber("lEncRate", Robot::drive->GetLEncRate());
+	/*Robot::drive->SetPID(frc::SmartDashboard::GetNumber("Speed_P", 0),
 						 frc::SmartDashboard::GetNumber("Speed_I", 0),
 						 frc::SmartDashboard::GetNumber("Speed_D", 0),
-						 frc::SmartDashboard::GetNumber("Speed_F", 0));
+						 frc::SmartDashboard::GetNumber("Speed_F", 0));*/
+	frc::SmartDashboard::PutNumber("Angle", table->GetNumber("XAngleToTarget", 0));
+	frc::SmartDashboard::PutNumber("LJoystick", Robot::oi->GetLJoystick());
 	double targetY = table->GetNumber("TargetY", 0.0);
 	double angleY = (480 - targetY) * 0.078445;
 	angleY = (15.1397 - 18.8268) + angleY;

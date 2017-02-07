@@ -29,7 +29,7 @@ class Robot : public IterativeRobot {
 public:
 	std::unique_ptr<Command> autonomousCommand;
 	static std::unique_ptr<OI> oi;
-	LiveWindow *lw = LiveWindow::GetInstance();
+	LiveWindow * lw = LiveWindow::GetInstance();
     static std::shared_ptr<Drive> drive;
 
 	virtual void RobotInit();

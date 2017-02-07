@@ -10,8 +10,8 @@ DriveForwardPID::DriveForwardPID(double dist) {
 // Called just before this Command runs the first time
 void DriveForwardPID::Initialize() {
 	driveDistance = frc::SmartDashboard::GetNumber("Drive Distance", 0);
-	initialEncoderTicksR = RobotMap::driverEnc->Get();
-	initialEncoderTicksL = RobotMap::drivelEnc->Get();
+	initialEncoderTicksR = Robot::drive->GetREnc();
+	initialEncoderTicksL = Robot::drive->GetLEnc();
 	Robot::drive->positionControlP = SmartDashboard::GetNumber("Pos_P", 0);
 	Robot::drive->positionControlI = SmartDashboard::GetNumber("Pos_I", 0);
 	Robot::drive->positionControlD = SmartDashboard::GetNumber("Pos_D", 0);
@@ -26,9 +26,9 @@ void DriveForwardPID::Execute() {
 // Make this return true when this Command no longer needs to run execute()
 bool DriveForwardPID::IsFinished() {
 	double placementErrorR = initialEncoderTicksR +
-				driveDistance * ENCODER_TICKS_PER_IN -  RobotMap::driverEnc->Get();
+				driveDistance * ENCODER_TICKS_PER_IN -  Robot::drive->GetREnc();
 	double placementErrorL = initialEncoderTicksL +
-					driveDistance * ENCODER_TICKS_PER_IN -  RobotMap::drivelEnc->Get();
+					driveDistance * ENCODER_TICKS_PER_IN -  Robot::drive->GetLEnc();
 	return fabs(placementErrorR) < 30 && fabs(placementErrorL) < 30;
 }
 

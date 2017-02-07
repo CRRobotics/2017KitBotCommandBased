@@ -10,13 +10,13 @@ DriveForward::DriveForward(double dist) {
 // Called just before this Command runs the first time
 void DriveForward::Initialize() {
 	driveDistance = frc::SmartDashboard::GetNumber("Drive Distance", 0);
-	initialEncoderTicks = RobotMap::driverEnc->Get();
+	initialEncoderTicks = Robot::drive->GetREnc();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void DriveForward::Execute() {
 	double placementError = initialEncoderTicks +
-			driveDistance * ENCODER_TICKS_PER_IN - RobotMap::driverEnc->Get();
+			driveDistance * ENCODER_TICKS_PER_IN - Robot::drive->GetREnc();
 	if(placementError > SLOW_BEGIN)
 		Robot::drive->TankDrive(-0.3, -0.3, true);
 	else if (placementError > SLOW_BEGIN * 0.5 )
@@ -28,7 +28,7 @@ void DriveForward::Execute() {
 // Make this return true when this Command no longer needs to run execute()
 bool DriveForward::IsFinished() {
 	double placementError = initialEncoderTicks +
-				driveDistance * ENCODER_TICKS_PER_IN -  RobotMap::driverEnc->Get();
+				driveDistance * ENCODER_TICKS_PER_IN -  Robot::drive->GetREnc();
 	return fabs(placementError) < 50;
 }
 

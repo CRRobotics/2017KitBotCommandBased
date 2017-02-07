@@ -9,13 +9,13 @@ OI::OI() {
 }
 
 double OI::GetLJoystick(){
-	if (fabs(lJoystick->GetY()) > 0.1)
+	if (fabs(lJoystick->GetY()) > 0.02)
 		return lJoystick->GetY();
 	return 0;
 }
 
 double OI::GetRJoystick(){
-	if (fabs(rJoystick->GetY()) > 0.1)
+	if (fabs(rJoystick->GetY()) > 0.02)
 		return rJoystick->GetY();
 	return 0;
 }

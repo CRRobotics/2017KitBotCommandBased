@@ -22,8 +22,8 @@ class RobotMap {
 public:
 	static std::shared_ptr<CANTalon> driverDrive;
 	static std::shared_ptr<CANTalon> drivelDrive;
-	static std::shared_ptr<Encoder> driverEnc;
-	static std::shared_ptr<Encoder> drivelEnc;
+//	static std::shared_ptr<Encoder> driverEnc;
+//	static std::shared_ptr<Encoder> drivelEnc;
 	static std::shared_ptr<AHRS> driveahrs;
 
 	static void init();

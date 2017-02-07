@@ -32,8 +32,8 @@ PushBackDrive::PushBackDrive(): Command() {
 void PushBackDrive::Initialize() {
 	P_CONSTANT = frc::SmartDashboard::GetNumber("PCons", 0);
 	D_CONSTANT = frc::SmartDashboard::GetNumber("DCons", 0);
-	prevlEncValue = RobotMap::drivelEnc->Get();
-	prevrEncValue = RobotMap::driverEnc->Get();
+	prevlEncValue = Robot::drive->GetLEnc();
+	prevrEncValue = Robot::drive->GetREnc();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -45,15 +45,15 @@ void PushBackDrive::Execute() {
 	if (fabs(lStickY) > 0.1 || fabs(rStickY) > 0.1)//if we're moving
 	{
 		Robot::drive->TankDrive(lStickY, rStickY);
-		prevrEncValue = RobotMap::driverEnc->Get();
-		prevlEncValue = RobotMap::drivelEnc->Get();
+		prevlEncValue = Robot::drive->GetLEnc();
+		prevrEncValue = Robot::drive->GetREnc();
 	}
 	else
 	{
-		if (fabs(RobotMap::drivelEnc->GetRate()) > 0.01 || fabs(RobotMap::driverEnc->GetRate()) > 0.01)
+		if (fabs(Robot::drive->GetREncRate()) > 0.01 || fabs(Robot::drive->GetLEncRate()) > 0.01)
 		{
-			double rErr = RobotMap::driverEnc->Get()  - prevrEncValue;
-			double lErr = RobotMap::drivelEnc->Get() - prevlEncValue;
+			double rErr = Robot::drive->GetREnc()  - prevrEncValue;
+			double lErr = Robot::drive->GetLEnc() - prevlEncValue;
 			double rSpeed = rErr * P_CONSTANT + (rErr - r_err_d) * D_CONSTANT;
 			double lSpeed = lErr * P_CONSTANT + (lErr - l_err_d) * D_CONSTANT;
 			r_err_d = rErr;

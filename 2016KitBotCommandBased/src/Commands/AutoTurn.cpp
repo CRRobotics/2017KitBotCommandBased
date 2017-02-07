@@ -2,7 +2,7 @@
 #include "AngleMethods.h"
 #define ENCODER_TICKS_PER_IN 483.74537
 #define SLOW_ANGLE_BEGIN 45
-#define SLOW_ANGLE_LIMIT 10
+#define SLOW_ANGLE_LIMIT 15
 
 AutoTurn::AutoTurn(double angle) {
 	Requires(Robot::drive.get());
@@ -19,23 +19,24 @@ void AutoTurn::Execute() {
 	double angleError = angle_diff(Robot::drive->GetYaw(), desiredAngle);
 	printf("ANGLE_ERROR: %f\n", angleError);
 	double direction = 1;
-	if (angleError < 0)
+	if (angleError > 0)
 	{
 		direction = -1;
 	}
 	angleError = fabs(angleError);
 	if(angleError > SLOW_ANGLE_BEGIN)
-		Robot::drive->TankDrive(0.4 * direction, 0.4 * -direction, true);
-	else if (angleError > SLOW_ANGLE_LIMIT)
-		Robot::drive->TankDrive(angleError/ SLOW_ANGLE_BEGIN * direction * 0.4, angleError/ SLOW_ANGLE_BEGIN * -direction * 0.4, true);
+		Robot::drive->TankDrive(0.4 * direction, 0.4 * -direction, false);
+//	else if (angleError > SLOW_ANGLE_LIMIT)
+//		Robot::drive->TankDrive(angleError/ SLOW_ANGLE_BEGIN * direction * 0.4, angleError/ SLOW_ANGLE_BEGIN * -direction * 0.4, false);
 	else
-		Robot::drive->TankDrive(0.2 * direction, 0.2 * -direction, true);
+		Robot::drive->TankDrive((0.21 + angleError/SLOW_ANGLE_BEGIN * 0.19) * direction, (0.21 + angleError/SLOW_ANGLE_BEGIN * 0.19) * -direction, false);
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool AutoTurn::IsFinished() {
 	double angleError = angle_diff(Robot::drive->GetYaw(), desiredAngle);
-	return fabs(angleError) < 5;
+	return false;
+	//return fabs(angleError) < 1;
 }
 
 // Called once after isFinished returns true
